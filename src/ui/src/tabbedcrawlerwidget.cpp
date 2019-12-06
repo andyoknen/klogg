@@ -34,31 +34,16 @@
 
 TabbedCrawlerWidget::TabbedCrawlerWidget()
     : QTabWidget()
-    , olddata_icon_( ":/images/olddata_icon.png" )
-    , newdata_icon_( ":/images/newdata_icon.png" )
-    , newfiltered_icon_( ":/images/newfiltered_icon.png" )
+    , olddata_icon_( ":/images/icons8-file-16.png" )
+    , newdata_icon_( ":/images/icons8-new-file-16.png" )
+    , newfiltered_icon_( ":/images/icons8-view-16.png" )
     , myTabBar_()
 {
 #ifdef Q_OS_WIN
-    myTabBar_.setStyleSheet( "QTabBar::tab {\
-            height: 20px; "
-                             "} "
-                             "QTabBar::close-button {\
-              height: 6px; width: 6px;\
-              subcontrol-origin: padding;\
-              subcontrol-position: left;\
-             }" );
+    myTabBar_.setStyleSheet( "QTabBar::tab { height:20px;} " );
 #else
     // On GTK style, it looks better with a smaller font
-    myTabBar_.setStyleSheet( "QTabBar::tab {"
-                             " height: 20px; "
-                             " font-size: 9pt; "
-                             "} "
-                             "QTabBar::close-button {\
-              height: 6px; width: 6px;\
-              subcontrol-origin: padding;\
-              subcontrol-position: left;\
-             }" );
+    myTabBar_.setStyleSheet( "QTabBar::tab { height: 20px; font-size: 9pt; }" );
 #endif
     setTabBar( &myTabBar_ );
     myTabBar_.hide();
@@ -77,12 +62,13 @@ void TabbedCrawlerWidget::addTabBarItem( int index, const QString& file_name )
 
     // Display the icon
     auto icon_label = std::make_unique<QLabel>();
-    icon_label->setPixmap( olddata_icon_.pixmap( 11, 12 ) );
+    icon_label->setPixmap( olddata_icon_.pixmap( 12, 12 ) );
     icon_label->setAlignment( Qt::AlignCenter );
+    icon_label->setStyleSheet("QLabel{background-color:transparent;}");
     myTabBar_.setTabButton( index, QTabBar::RightSide, icon_label.release() );
 
     LOG( logDEBUG ) << "addTab, count = " << count();
-    LOG( logDEBUG ) << "width = " << olddata_icon_.pixmap( 11, 12 ).devicePixelRatio();
+    LOG( logDEBUG ) << "width = " << olddata_icon_.pixmap( 12, 12 ).devicePixelRatio();
 
     if ( count() > 1 )
         myTabBar_.show();

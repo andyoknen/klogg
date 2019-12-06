@@ -102,7 +102,7 @@ MainWindow::MainWindow( Session& session )
                  geometry.height() - 140 );
 
     mainIcon_.addFile( ":/images/hicolor/16x16/klogg.png" );
-    // mainIcon_.addFile( ":/images/hicolor/24x24/klogg.png" );
+    //mainIcon_.addFile( ":/images/hicolor/24x24/klogg.png" );
     mainIcon_.addFile( ":/images/hicolor/32x32/klogg.png" );
     mainIcon_.addFile( ":/images/hicolor/48x48/klogg.png" );
 
@@ -254,7 +254,7 @@ void MainWindow::createActions()
 
     openAction = new QAction( tr( "&Open..." ), this );
     openAction->setShortcuts( QKeySequence::keyBindings( QKeySequence::Open ) );
-    openAction->setIcon( QIcon( ":/images/open14.png" ) );
+    openAction->setIcon( QIcon( ":/images/icons8-add-file-16.png" ) );
     openAction->setStatusTip( tr( "Open a file" ) );
     connect( openAction, &QAction::triggered, [this]( auto ) { this->open(); } );
 
@@ -340,7 +340,7 @@ void MainWindow::createActions()
              &MainWindow::toggleFilteredLineNumbersVisibility );
 
     followAction = new QAction( tr( "&Follow File" ), this );
-    followAction->setIcon( QIcon( ":/images/icons8-database-backup-16.png" ) );
+    followAction->setIcon( QIcon( ":/images/icons8-filtration-16.png" ) );
 
     followAction->setShortcuts( QList<QKeySequence>()
                                 << QKeySequence( Qt::Key_F ) << QKeySequence( Qt::Key_F10 ) );
@@ -350,11 +350,11 @@ void MainWindow::createActions()
 
     reloadAction = new QAction( tr( "&Reload" ), this );
     reloadAction->setShortcuts( QKeySequence::keyBindings( QKeySequence::Refresh ) );
-    reloadAction->setIcon( QIcon( ":/images/reload14.png" ) );
+    reloadAction->setIcon( QIcon( ":/images/icons8-renew-16.png" ) );
     signalMux_.connect( reloadAction, SIGNAL( triggered() ), SLOT( reload() ) );
 
     stopAction = new QAction( tr( "&Stop" ), this );
-    stopAction->setIcon( QIcon( ":/images/stop14.png" ) );
+    stopAction->setIcon( QIcon( ":/images/icons8-delete-file-16.png" ) );
     stopAction->setEnabled( true );
     signalMux_.connect( stopAction, SIGNAL( triggered() ), SLOT( stopLoading() ) );
 
@@ -444,8 +444,8 @@ void MainWindow::createMenus()
     toolsMenu->addSeparator();
     toolsMenu->addAction( optionsAction );
 
-    toolsMenu->addSeparator();
-    toolsMenu->addAction( showScratchPadAction );
+    // toolsMenu->addSeparator();
+    // toolsMenu->addAction( showScratchPadAction );
 
     encodingMenu = menuBar()->addMenu( tr( "En&coding" ) );
     encodingMenu->addAction( encodingAction[ 0 ] );
@@ -464,8 +464,7 @@ void MainWindow::createMenus()
 void MainWindow::createToolBars()
 {
     infoLine = new InfoLine();
-    infoLine->setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
-    infoLine->setLineWidth( 0 );
+    infoLine->setFrameStyle( QFrame::Box | QFrame::Sunken );
     infoLine->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Minimum );
 
     sizeField = new QLabel();
@@ -482,12 +481,14 @@ void MainWindow::createToolBars()
     lineNbField->setContentsMargins( 2, 0, 2, 0 );
 
     toolBar = addToolBar( tr( "&Toolbar" ) );
-    toolBar->setIconSize( QSize( 14, 14 ) );
+    toolBar->setIconSize( QSize( 16, 16 ) );
     toolBar->setMovable( false );
     toolBar->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Minimum );
     toolBar->addAction( openAction );
     toolBar->addAction( reloadAction );
     toolBar->addAction( followAction );
+    
+    infoToolbarSeparators.push_back( toolBar->addSeparator() );
     toolBar->addWidget( infoLine );
     toolBar->addAction( stopAction );
 

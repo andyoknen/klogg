@@ -5,17 +5,6 @@
     <file>images/hicolor/48x48/klogg.png</file>
     <file>images/open14.png</file>
     <file>images/open14@2x.png</file>
-    <file>images/follow14.png</file>
-    <file>images/follow14@2x.png</file>
-    <file>images/reload14.png</file>
-    <file>images/reload14@2x.png</file>
-    <file>images/olddata_icon.png</file>
-    <file>images/olddata_icon@2x.png</file>
-    <file>images/newdata_icon.png</file>
-    <file>images/newdata_icon@2x.png</file>
-    <file>images/newfiltered_icon.png</file>
-    <file>images/newfiltered_icon@2x.png</file>
-    <file>images/stop14.png</file>
     <file>images/plus.png</file>
     <file>images/minus.png</file>
     <file>images/down.png</file>
@@ -24,11 +13,15 @@
     <file>images/arrowup.png</file>
     <file>images/darkclosebutton.png</file>
     <file>images/case48.png</file>
-    <file>images/regex.png</file>
-    <file>images/icons8-refresh-16.png</file>
-    <file>images/icons8-search-16.png</file>
-    <file>images/icons8-font-size-16.png</file>
     <file>images/icons8-document-32.png</file>
     <file>images/icons8-database-backup-16.png</file>
+    <file>images/icons8-conversion-16.png</file>
+    <file>images/icons8-view-16.png</file>
+    <file>images/icons8-file-16.png</file>
+    <file>images/icons8-new-file-16.png</file>
+    <file>images/icons8-renew-16.png</file>
+    <file>images/icons8-filtration-16.png</file>
+    <file>images/icons8-delete-file-16.png</file>
+    <file>images/icons8-add-file-16.png</file>
 </qresource>
 </RCC>
