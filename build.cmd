@@ -4,4 +4,6 @@ md build
 cd build
 cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_VERSION=X.X.X ../
 cmake --build . --config Release -j 8
-cmd /K output\klogg_portable.exe
+
+del klogg.exe
+move klogg_portable.exe klogg.exe
