@@ -31,7 +31,7 @@ release/
 object_script.glogg.Debug
 object_script.glogg.Release
 
-
+build.cmd
 build/
 
 # Qt-specific
@@ -51,4 +51,3 @@ cmake-build-release/
 #website
 website/hugo
 website/resources/
-build.cmd
