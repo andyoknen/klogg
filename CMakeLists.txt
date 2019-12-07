@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
 
 project(klogg
-        VERSION 19.12.0
+        VERSION 19.12.1
         DESCRIPTION "klogg log viewer"
         LANGUAGES C CXX)
-set(PROJECT_HOMEPAGE_URL "https://github.com/variar/klogg")
+set(PROJECT_HOMEPAGE_URL "https://github.com/brangr/klogg")
 
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 

@@ -68,7 +68,7 @@
 #include "mainwindow.h"
 
 #include "crawlerwidget.h"
-#include "highlightersdialog.h"
+#include "filtersdialog.h"
 #include "menuactiontooltipbehavior.h"
 #include "optionsdialog.h"
 #include "recentfiles.h"
@@ -358,11 +358,11 @@ void MainWindow::createActions()
     stopAction->setEnabled( true );
     signalMux_.connect( stopAction, SIGNAL( triggered() ), SLOT( stopLoading() ) );
 
-    highlightersAction = new QAction( tr( "&Highlighters..." ), this );
-    highlightersAction->setStatusTip( tr( "Show the Highlighters box" ) );
+    highlightersAction = new QAction( tr( "&Filters" ), this );
+    highlightersAction->setStatusTip( tr( "Show the Filters box" ) );
     connect( highlightersAction, &QAction::triggered, [this]( auto ) { this->highlighters(); } );
 
-    optionsAction = new QAction( tr( "&Options..." ), this );
+    optionsAction = new QAction( tr( "&Options" ), this );
     optionsAction->setStatusTip( tr( "Show the Options box" ) );
     connect( optionsAction, &QAction::triggered, [this]( auto ) { this->options(); } );
 
@@ -677,7 +677,7 @@ void MainWindow::openClipboard()
 // Opens the 'Highlighters' dialog box
 void MainWindow::highlighters()
 {
-    HighlightersDialog dialog( this );
+    FiltersDialog dialog( this );
     signalMux_.connect( &dialog, SIGNAL( optionsChanged() ), SLOT( applyConfiguration() ) );
     dialog.exec();
     signalMux_.disconnect( &dialog, SIGNAL( optionsChanged() ), SLOT( applyConfiguration() ) );
@@ -707,11 +707,11 @@ void MainWindow::about()
 #ifdef GLOGG_COMMIT
             "<p>Built " GLOGG_DATE " from " GLOGG_COMMIT "</p>"
 #endif
-            "<p><a href=\"https://github.com/variar/klogg\">https://github.com/variar/klogg</a></p>"
+            "<p><a href=\"https://github.com/brangr/klogg\">https://github.com/brangr/klogg</a></p>"
             "<p>This is fork of glogg</p>"
             "<p><a href=\"http://glogg.bonnefon.org/\">http://glogg.bonnefon.org/</a></p>"
             "<p>Using icons form <a href=\"https://icons8.com\">icons8.com</a> project</p>"
-            "<p>Copyright &copy; 2019 Nicolas Bonnefon, Anton Filimonov and other contributors</p>"
+            "<p>Copyright &copy; 2019 Nicolas Bonnefon, Anton Filimonov, Andy Oknen and other contributors</p>"
             "<p>You may modify and redistribute the program under the terms of the GPL (version 3 "
             "or later).</p>" ) );
 }
@@ -1245,7 +1245,7 @@ void MainWindow::readSettings()
     RecentFiles::getSynced();
     updateRecentFileActions();
 
-    HighlighterSet::getSynced();
+    FilterSet::getSynced();
 }
 
 void MainWindow::displayQuickFindBar( QuickFindMux::QFDirection direction )

@@ -66,7 +66,7 @@
 #include "log.h"
 
 #include "configuration.h"
-#include "highlighterset.h"
+#include "filterset.h"
 #include "logmainview.h"
 #include "overview.h"
 #include "quickfind.h"
@@ -1626,7 +1626,7 @@ void AbstractLogView::drawTextArea( QPaintDevice* paint_device, int32_t delta_y 
     const int paintDeviceHeight = paint_device->height() / viewport()->devicePixelRatio();
     const int paintDeviceWidth = paint_device->width() / viewport()->devicePixelRatio();
     const QPalette& palette = viewport()->palette();
-    const auto& highlighterSet = HighlighterSet::get();
+    const auto& filterSet = FilterSet::get();
     QColor foreColor, backColor;
 
     static const QBrush normalBulletBrush = QBrush( Qt::white );
@@ -1732,7 +1732,7 @@ void AbstractLogView::drawTextArea( QPaintDevice* paint_device, int32_t delta_y 
             backColor = palette.color( QPalette::Highlight );
             painter.setPen( palette.color( QPalette::Text ) );
         }
-        else if ( highlighterSet.matchLine( logData->getLineString( line_index ), &foreColor,
+        else if ( filterSet.matchLine( logData->getLineString( line_index ), &foreColor,
                                             &backColor ) ) {
             // Apply a filter to the line
         }

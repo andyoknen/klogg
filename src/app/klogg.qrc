@@ -1,20 +1,15 @@
 <RCC>
-<qresource>
+  <qresource>
+    <file>images/icons8-sort-up-16.png</file>
+    <file>images/icons8-sort-down-16.png</file>
     <file>images/hicolor/16x16/klogg.png</file>
     <file>images/hicolor/32x32/klogg.png</file>
     <file>images/hicolor/48x48/klogg.png</file>
     <file>images/open14.png</file>
     <file>images/open14@2x.png</file>
-    <file>images/plus.png</file>
-    <file>images/minus.png</file>
-    <file>images/down.png</file>
-    <file>images/up.png</file>
     <file>images/arrowdown.png</file>
     <file>images/arrowup.png</file>
     <file>images/darkclosebutton.png</file>
-    <file>images/case48.png</file>
-    <file>images/icons8-document-32.png</file>
-    <file>images/icons8-database-backup-16.png</file>
     <file>images/icons8-conversion-16.png</file>
     <file>images/icons8-view-16.png</file>
     <file>images/icons8-file-16.png</file>
@@ -23,5 +18,5 @@
     <file>images/icons8-filtration-16.png</file>
     <file>images/icons8-delete-file-16.png</file>
     <file>images/icons8-add-file-16.png</file>
-</qresource>
+  </qresource>
 </RCC>

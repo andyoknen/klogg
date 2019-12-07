@@ -26,5 +26,5 @@ This release has following changes:
  - add checking for new version on Windows (new version info file is downloaded directly from GitHub)
  - updated 3rdparty libraries to latest versions
   
-Download on Github: [klogg 19.2](https://github.com/variar/klogg/releases/tag/v19.2)
+Download on Github: [klogg 19.2](https://github.com/brangr/klogg/releases/tag/v19.2)
 

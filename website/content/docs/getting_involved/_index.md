@@ -5,7 +5,7 @@ bookFlatSection: true
 
 ## Github
 
-Feel free to submit bug reports, feature requests, questions and pull requests on [Github project](https://github.com/variar/klogg).
+Feel free to submit bug reports, feature requests, questions and pull requests on [Github project](https://github.com/brangr/klogg).
 
 ## Mailing list
 _glogg_ has a mailing list where bugs, features and future development are discussed. Sometimes these ideas end up in _klogg_ earlier.

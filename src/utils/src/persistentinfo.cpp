@@ -140,7 +140,7 @@ void PersistentInfo::UpdateSettings()
         sessionSettings_->setValue( "Window/geometry", sessionSettings_->value( "geometry" ) );
         sessionSettings_->setValue( "VersionChecker/nextDeadline",
                                     sessionSettings_->value( "versionchecker.nextDeadline" ) );
-        sessionSettings_->remove( "HighlighterSet" );
+        sessionSettings_->remove( "FilterSet" );
         for ( const auto& key : sessionSettings_->childKeys() ) {
             sessionSettings_->remove( key );
         }
