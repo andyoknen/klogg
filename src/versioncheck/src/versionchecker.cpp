@@ -45,7 +45,7 @@
 #include <QNetworkProxyFactory>
 
 const char* VersionChecker::VERSION_URL
-    = "https://raw.githubusercontent.com/variar/klogg/master/latest.json";
+    = "https://raw.githubusercontent.com/brangr/klogg/master/latest.json";
 
 const uint64_t VersionChecker::CHECK_INTERVAL_S = 3600 * 24 * 7; /* 7 days */
 

@@ -1021,14 +1021,14 @@ void MainWindow::keyPressEvent( QKeyEvent* keyEvent )
     LOG( logDEBUG4 ) << "keyPressEvent received";
 
     switch ( keyEvent->key() ) {
-    case Qt::Key_Apostrophe:
-        displayQuickFindBar( QuickFindMux::Forward );
-        break;
-    case Qt::Key_QuoteDbl:
-        displayQuickFindBar( QuickFindMux::Backward );
-        break;
-    default:
-        keyEvent->ignore();
+        case Qt::Key_Apostrophe:
+            displayQuickFindBar( QuickFindMux::Forward );
+            break;
+        case Qt::Key_QuoteDbl:
+            displayQuickFindBar( QuickFindMux::Backward );
+            break;
+        default:
+            keyEvent->ignore();
     }
 
     if ( !keyEvent->isAccepted() )

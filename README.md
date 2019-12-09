@@ -1,14 +1,4 @@
-[![Build Status](https://travis-ci.org/variar/klogg.svg?branch=master)](https://travis-ci.org/variar/klogg)
-[![Win32 Build Status](https://ci.appveyor.com/api/projects/status/github/variar/klogg?svg=true)](https://ci.appveyor.com/project/variar/klogg)
-[ ![Release](https://img.shields.io/github/v/release/variar/klogg?style=flat)](https://github.com/brangr/klogg/releases/tag/v19.9)
-[ ![Bintray](https://img.shields.io/bintray/v/variar/generic/klogg?style=flat)](https://bintray.com/variar/generic/klogg/_latestVersion)
-[ ![Chocolatey](https://img.shields.io/chocolatey/v/klogg?style=flat)](https://chocolatey.org/packages/klogg)
-
-
-Latest continuous integration builds can be downloaded from releases:
-[windows](https://github.com/brangr/klogg/releases/tag/continuous-win) |
-[linux](https://github.com/brangr/klogg/releases/tag/continuous-linux) |
-[mac](https://github.com/brangr/klogg/releases/tag/continuous-osx)
+[ ![Release](https://img.shields.io/github/v/release/brangr/klogg?style=flat)](https://github.com/brangr/klogg/releases/tag/v19.12.1.0)
 
 klogg is the fork of [glogg](https://github.com/nickbnf/glogg) - the fast, smart log explorer.
 
