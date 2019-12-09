@@ -117,6 +117,9 @@ class CrawlerWidget : public QSplitter,
     // suitable to display to the user.
     QString encodingText() const;
 
+    // Toggle filter windows visible
+    void toggleQrawlerVisible(bool visible);
+
   public slots:
     // Stop the asynchoronous loading of the file if one is in progress
     // The file is identified by the view attached to it.
@@ -346,6 +349,9 @@ class CrawlerWidget : public QSplitter,
     // Current encoding setting;
     Encoding encodingSetting_ = Encoding::AUTO;
     QString encoding_text_;
+
+    // Last splitter sizes
+    QList<int> lastSizes;
 };
 
 #endif

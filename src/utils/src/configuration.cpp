@@ -129,6 +129,8 @@ void Configuration::retrieveFromStorage( QSettings& settings )
     // View settings
     if ( settings.contains( "view.overviewVisible" ) )
         overviewVisible_ = settings.value( "view.overviewVisible" ).toBool();
+    if ( settings.contains( "view.qrawlerVisible" ) )
+        qrawlerVisible_ = settings.value( "view.qrawlerVisible" ).toBool();
     if ( settings.contains( "view.lineNumbersVisibleInMain" ) )
         lineNumbersVisibleInMain_ = settings.value( "view.lineNumbersVisibleInMain" ).toBool();
     if ( settings.contains( "view.lineNumbersVisibleInFiltered" ) )
@@ -188,6 +190,7 @@ void Configuration::saveToStorage( QSettings& settings ) const
     settings.setValue( "perf.useLineEndingCache", useLineEndingCache_ );
 
     settings.setValue( "view.overviewVisible", overviewVisible_ );
+    settings.setValue( "view.qrawlerVisible", qrawlerVisible_ );
     settings.setValue( "view.lineNumbersVisibleInMain", lineNumbersVisibleInMain_ );
     settings.setValue( "view.lineNumbersVisibleInFiltered", lineNumbersVisibleInFiltered_ );
     settings.setValue( "view.minimizeToTray", minimizeToTray_ );

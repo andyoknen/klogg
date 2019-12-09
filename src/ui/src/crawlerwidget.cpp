@@ -290,6 +290,7 @@ void CrawlerWidget::doSetViewContext( const QString& view_context )
     const auto context = CrawlerWidgetContext{ view_context };
 
     setSizes( context.sizes() );
+
     matchCaseButton->setChecked( !context.ignoreCase() );
     useRegexpButton->setChecked( context.useRegexp() );
 
@@ -488,6 +489,8 @@ void CrawlerWidget::applyConfiguration()
     logMainView->update();
     filteredView->updateDisplaySize();
     filteredView->update();
+    
+    toggleQrawlerVisible( config.isQrawlerVisible() );
 
     // Update the SearchLine (history)
     updateSearchCombo();
@@ -900,6 +903,9 @@ void CrawlerWidget::setup()
 
     connect( logMainView, &LogMainView::saveDefaultSplitterSizes, saveSplitterSizes );
     connect( filteredView, &FilteredView::saveDefaultSplitterSizes, saveSplitterSizes );
+    
+    lastSizes = this->sizes();
+    toggleQrawlerVisible( config.isQrawlerVisible() );
 
     connect( logFilteredData_, &LogFilteredData::searchProgressed, this,
              &CrawlerWidget::updateFilteredView, Qt::QueuedConnection );
@@ -1137,6 +1143,22 @@ void CrawlerWidget::changeTopViewSize( int32_t delta )
                     << max;
     moveSplitter( closestLegalPosition( sizes().at( 0 ) + ( delta * 10 ), 1 ), 1 );
     LOG( logDEBUG ) << "CrawlerWidget::changeTopViewSize " << sizes().at( 0 );
+}
+
+void CrawlerWidget::toggleQrawlerVisible(bool visible)
+{
+    if( bottomWindow->isVisible() && !visible )
+    {
+        lastSizes = sizes();
+        bottomWindow->setVisible(false);
+        setSizes( QList<int>{ logMainView->height(), 0 } );
+    }
+    
+    if ( !bottomWindow->isVisible() && visible )
+    {
+        bottomWindow->setVisible(true);
+        setSizes( lastSizes );
+    }
 }
 
 //

@@ -341,12 +341,17 @@ void MainWindow::createActions()
 
     followAction = new QAction( tr( "&Follow File" ), this );
     followAction->setIcon( QIcon( ":/images/icons8-filtration-16.png" ) );
-
     followAction->setShortcuts( QList<QKeySequence>()
                                 << QKeySequence( Qt::Key_F ) << QKeySequence( Qt::Key_F10 ) );
-
     followAction->setCheckable( true );
     connect( followAction, &QAction::toggled, this, &MainWindow::followSet );
+
+    qrawlerAction = new QAction( tr( "&Filter Window" ), this );
+    qrawlerAction->setIcon( QIcon( ":/images/icons8-filtration-16.png" ) );
+    qrawlerAction->setShortcuts( QList<QKeySequence>() << QKeySequence( Qt::Key_S ) << QKeySequence( Qt::Key_F7 ) );
+    qrawlerAction->setCheckable( true );
+    qrawlerAction->setChecked( config.isQrawlerVisible() );
+    connect( qrawlerAction, &QAction::toggled, this, &MainWindow::toggleQrawlerVisibility );
 
     reloadAction = new QAction( tr( "&Reload" ), this );
     reloadAction->setShortcuts( QKeySequence::keyBindings( QKeySequence::Refresh ) );
@@ -436,6 +441,7 @@ void MainWindow::createMenus()
     viewMenu->addAction( lineNumbersVisibleInFilteredAction );
     viewMenu->addSeparator();
     viewMenu->addAction( followAction );
+    viewMenu->addAction( qrawlerAction );
     viewMenu->addSeparator();
     viewMenu->addAction( reloadAction );
 
@@ -745,6 +751,15 @@ void MainWindow::toggleOverviewVisibility( bool isVisible )
     auto& config = Configuration::get();
     config.setOverviewVisible( isVisible );
     emit optionsChanged();
+}
+
+void MainWindow::toggleQrawlerVisibility( bool isVisible )
+{
+    auto& config = Configuration::get();
+    config.setQrawlerVisible( isVisible );
+    emit optionsChanged();
+
+    currentCrawlerWidget()->toggleQrawlerVisible(isVisible);
 }
 
 void MainWindow::toggleMainLineNumbersVisibility( bool isVisible )

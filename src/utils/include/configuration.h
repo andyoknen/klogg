@@ -223,6 +223,14 @@ class Configuration final : public Persistable<Configuration> {
     {
         overviewVisible_ = isVisible;
     }
+    bool isQrawlerVisible() const
+    {
+        return qrawlerVisible_;
+    }
+    void setQrawlerVisible( bool isVisible )
+    {
+        qrawlerVisible_ = isVisible;
+    }
     bool mainLineNumbersVisible() const
     {
         return lineNumbersVisibleInMain_;
@@ -318,6 +326,7 @@ class Configuration final : public Persistable<Configuration> {
 
     // View settings
     bool overviewVisible_ = true;
+    bool qrawlerVisible_ = true;
     bool lineNumbersVisibleInMain_ = false;
     bool lineNumbersVisibleInFiltered_ = true;
     bool minimizeToTray_ = false;
