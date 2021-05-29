@@ -96,6 +96,8 @@ MainWindow::MainWindow( Session& session )
 
     setAcceptDrops( true );
 
+    QApplication::setStyle("macintosh");
+
     // Default geometry
     const QRect geometry = QApplication::desktop()->availableGeometry( this );
     setGeometry( geometry.x() + 20, geometry.y() + 40, geometry.width() - 140,

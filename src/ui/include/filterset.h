@@ -61,7 +61,6 @@ class Filter
     QRegularExpression regexp_;
     QString foreColorName_;
     QString backColorName_;
-    bool enabled_;
 };
 
 // Represents an ordered set of filters to be applied to each line displayed.
@@ -70,6 +69,7 @@ class FilterSet : public Persistable<FilterSet>
   public:
     // Construct an empty filter set
     FilterSet();
+    virtual ~FilterSet() {}
 
     // Returns weither the passed line match a filter of the set,
     // if so, it returns the fore/back colors the line should use.

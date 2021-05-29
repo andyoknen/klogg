@@ -114,7 +114,8 @@ void SingleApplicationPrivate::genBlockServerName()
 #endif
 #ifdef Q_OS_UNIX
         QProcess process;
-        process.start( "whoami" );
+        process.setProgram("whoami");
+        process.start();
         if( process.waitForFinished( 100 ) &&
             process.exitCode() == QProcess::NormalExit) {
             appData.addData( process.readLine() );

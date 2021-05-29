@@ -735,9 +735,9 @@ void CrawlerWidget::setup()
     visibilityBox = new QComboBox();
     visibilityBox->setModel( visibilityModel_ );
     visibilityBox->setView( visibilityView );
-    visibilityBox->setFixedHeight(22);
+    //visibilityBox->setFixedHeight(22);
     visibilityBox->setCurrentIndex( 0 );
-    visibilityBox->setContentsMargins( 1, 0, 0, 0 );
+    visibilityBox->setContentsMargins( 0, 0, 0, 0 );
 
     // Construct the Search Info line
     searchInfoLine = new InfoLine();
@@ -748,33 +748,37 @@ void CrawlerWidget::setup()
     searchInfoLineSizePolicy.setRetainSizeWhenHidden( false );
     searchInfoLine->setSizePolicy( searchInfoLineSizePolicy );
     searchInfoLineDefaultPalette = searchInfoLine->palette();
+    searchInfoLine->setContentsMargins( 0, 0, 0, 0 );
 
-    const QSize btnSize = QSize(26, 24);
+    //const QSize btnSize = QSize(30, 30);
 
     matchCaseButton = new QPushButton();
     matchCaseButton->setToolTip( "Match case" );
-    // matchCaseButton->setIcon( QIcon( ":/images/icons8-font-size-16.png" ) );
+    //matchCaseButton->setIcon( QIcon( ":/images/icons8-font-size-16.png" ) );
     matchCaseButton->setText( "Aa" );
-    matchCaseButton->setStyleSheet("text-alig:center;");
-    matchCaseButton->setMinimumSize(btnSize);
-    matchCaseButton->setMaximumSize(btnSize);
+    //matchCaseButton->setStyleSheet("text-alig:center;");
+    //useRegexpButton->setFixedWidth(40);
     matchCaseButton->setCheckable( true );
     matchCaseButton->setFocusPolicy( Qt::NoFocus );
+    matchCaseButton->setContentsMargins( 0, 0, 0, 0 );
 
     useRegexpButton = new QPushButton();
     useRegexpButton->setToolTip( "Use regex" );
-    // useRegexpButton->setIcon( QIcon( ":/images/regex.png" ) );
+    //useRegexpButton->setIcon( QIcon( ":/images/regex.png" ) );
     useRegexpButton->setText( ".*" );
-    useRegexpButton->setStyleSheet("text-alig:center;");
-    useRegexpButton->setMaximumSize(btnSize);
+    //useRegexpButton->setStyleSheet("text-alig:center;");
+    //useRegexpButton->setFixedWidth(40);
     useRegexpButton->setCheckable( true );
     useRegexpButton->setFocusPolicy( Qt::NoFocus );
+    useRegexpButton->setContentsMargins( 0, 0, 0, 0 );
     
     searchRefreshButton = new QPushButton();
     searchRefreshButton->setToolTip( "Auto-refresh" );
-    searchRefreshButton->setIcon( QIcon( ":/images/icons8-filtration-16.png" ) );
+    //searchRefreshButton->setIcon( QIcon( ":/images/icons8-filtration-16.png" ) );
+    searchRefreshButton->setText("Refresh");
     searchRefreshButton->setCheckable( true );
     searchRefreshButton->setFocusPolicy( Qt::NoFocus );
+    searchRefreshButton->setContentsMargins( 0, 0, 0, 0 );
 
     // Construct the Search line
     searchLabel = new QLabel( tr( "&Text: " ) );
@@ -785,7 +789,7 @@ void CrawlerWidget::setup()
     searchLineEdit->setEditable( true );
     searchLineEdit->setCompleter( searchLineCompleter );
     searchLineEdit->addItems( savedSearches_->recentSearches() );
-    searchLineEdit->setFixedHeight(22);
+    searchLineEdit->setFixedHeight(24);
     searchLineEdit->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Minimum );
     searchLineEdit->setSizeAdjustPolicy( QComboBox::AdjustToMinimumContentsLengthWithIcon );
     searchLineEdit->lineEdit()->setMaxLength( std::numeric_limits<int>::max() / 1024 );
@@ -796,7 +800,8 @@ void CrawlerWidget::setup()
 
     searchButton = new QPushButton();
     searchButton->setToolTip("Apply filter");
-    searchButton->setIcon( QIcon( ":/images/icons8-conversion-16.png" ) );
+    //searchButton->setIcon( QIcon( ":/images/icons8-conversion-16.png" ) );
+    searchButton->setText( "Filter" );
     searchButton->setCheckable(false);
     searchButton->setFocusPolicy(Qt::NoFocus);
 
@@ -818,15 +823,15 @@ void CrawlerWidget::setup()
     searchLineLayout->addWidget( stopButton );
 
     searchLineLayout->setSpacing( 0 );
-    searchLineLayout->setMargin( 2 );
+    searchLineLayout->setMargin( 0 );
     searchLineLayout->setContentsMargins( 0, 0, 0, 0 );
 
     // Construct the bottom window
     auto* bottomMainLayout = new QVBoxLayout;
     bottomMainLayout->addLayout( searchLineLayout );
     bottomMainLayout->addWidget( filteredView );
-    bottomMainLayout->setSpacing(2);
-    bottomMainLayout->setMargin(0);
+    bottomMainLayout->setSpacing(1);
+    bottomMainLayout->setMargin(1);
     bottomMainLayout->setContentsMargins( 1, 1, 1, 1 );
     bottomWindow->setLayout( bottomMainLayout );
 
