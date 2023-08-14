@@ -261,6 +261,14 @@ class Configuration final : public Persistable<Configuration> {
     {
         overviewVisible_ = isVisible;
     }
+    bool isQrawlerVisible() const
+    {
+        return qrawlerVisible_;
+    }
+    void setQrawlerVisible( bool isVisible )
+    {
+        qrawlerVisible_ = isVisible;
+    }
     bool mainLineNumbersVisible() const
     {
         return lineNumbersVisibleInMain_;
@@ -533,6 +541,7 @@ class Configuration final : public Persistable<Configuration> {
     bool allowMultipleWindows_ = false;
 
     // View settings
+    bool qrawlerVisible_ = true;
     bool overviewVisible_ = true;
     bool lineNumbersVisibleInMain_ = false;
     bool lineNumbersVisibleInFiltered_ = true;

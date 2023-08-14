@@ -141,7 +141,7 @@ MainWindow::MainWindow( WindowSession session )
                  geometry.height() - 140 );
 
     mainIcon_.addFile( ":/images/hicolor/16x16/klogg.png" );
-    // mainIcon_.addFile( ":/images/hicolor/24x24/klogg.png" );
+    //mainIcon_.addFile( ":/images/hicolor/24x24/klogg.png" );
     mainIcon_.addFile( ":/images/hicolor/32x32/klogg.png" );
     mainIcon_.addFile( ":/images/hicolor/48x48/klogg.png" );
 
@@ -474,6 +474,7 @@ void MainWindow::createActions()
 
     openAction = new QAction( tr( action::openText ), this );
     openAction->setStatusTip( tr( action::openStatusTip ) );
+    openAction->setIcon( QIcon( ":/images/icons8-add-file-16.png" ) );
     connect( openAction, &QAction::triggered, [ this ]( auto ) { this->open(); } );
 
     recentFilesCleanup = new QAction( tr( action::recentFilesCleanupText ), this );
@@ -570,9 +571,17 @@ void MainWindow::createActions()
              &MainWindow::toggleFilteredLineNumbersVisibility );
 
     followAction = new QAction( tr( action::followText ), this );
+    followAction->setIcon( QIcon( ":/images/icons8-filtration-16.png" ) );
     followAction->setCheckable( true );
     followAction->setEnabled( config.anyFileWatchEnabled() );
     connect( followAction, &QAction::toggled, this, &MainWindow::followSet );
+
+    qrawlerAction = new QAction( tr( "&Filter Window" ), this );
+    qrawlerAction->setIcon( QIcon( ":/images/icons8-filtration-16.png" ) );
+    qrawlerAction->setShortcuts( QList<QKeySequence>() << QKeySequence( Qt::Key_S ) << QKeySequence( Qt::Key_F7 ) );
+    qrawlerAction->setCheckable( true );
+    qrawlerAction->setChecked( config.isQrawlerVisible() );
+    connect( qrawlerAction, &QAction::toggled, this, &MainWindow::toggleQrawlerVisibility );
 
     textWrapAction = new QAction( tr( action::wrapText ), this );
     textWrapAction->setCheckable( true );
@@ -580,9 +589,11 @@ void MainWindow::createActions()
     connect( textWrapAction, &QAction::toggled, this, &MainWindow::textWrapSet );
 
     reloadAction = new QAction( tr( action::reloadText ), this );
+    reloadAction->setIcon( QIcon( ":/images/icons8-renew-16.png" ) );
     signalMux_.connect( reloadAction, SIGNAL( triggered() ), SLOT( reload() ) );
 
     stopAction = new QAction( tr( action::stopText ), this );
+    stopAction->setIcon( QIcon( ":/images/icons8-delete-file-16.png" ) );
     stopAction->setEnabled( true );
     signalMux_.connect( stopAction, SIGNAL( triggered() ), SLOT( stopLoading() ) );
 
@@ -789,6 +800,7 @@ void MainWindow::createMenus()
     viewMenu->addAction( textWrapAction );
     viewMenu->addSeparator();
     viewMenu->addAction( followAction );
+    viewMenu->addAction( qrawlerAction );
     viewMenu->addSeparator();
     viewMenu->addAction( reloadAction );
 
@@ -805,8 +817,8 @@ void MainWindow::createMenus()
 
     toolsMenu->addAction( predefinedFiltersDialogAction );
 
-    toolsMenu->addSeparator();
-    toolsMenu->addAction( showScratchPadAction );
+    // toolsMenu->addSeparator();
+    // toolsMenu->addAction( showScratchPadAction );
 
     menuBar()->addMenu( EncodingMenu::generate( encodingGroup ) );
     menuBar()->addSeparator();
@@ -830,7 +842,7 @@ void MainWindow::createMenus()
 void MainWindow::createToolBars()
 {
     infoLine = new PathLine();
-    infoLine->setFrameStyle( QFrame::StyledPanel );
+    infoLine->setFrameStyle( QFrame::Box | QFrame::Sunken );
     infoLine->setFrameShadow( QFrame::Sunken );
     infoLine->setLineWidth( 0 );
     infoLine->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Minimum );
@@ -857,6 +869,7 @@ void MainWindow::createToolBars()
     toolBar->addAction( reloadAction );
     toolBar->addAction( followAction );
     toolBar->addAction( addToFavoritesAction );
+    infoToolbarSeparators.push_back( toolBar->addSeparator() );
     toolBar->addWidget( infoLine );
     toolBar->addAction( stopAction );
 
@@ -1162,7 +1175,7 @@ void MainWindow::openUrl()
 // Opens the 'Highlighters' dialog box
 void MainWindow::editHighlighters()
 {
-    HighlightersDialog dialog( this );
+    FiltersDialog dialog( this );
     signalMux_.connect( &dialog, SIGNAL( optionsChanged() ), SLOT( applyConfiguration() ) );
 
     connect( &dialog, &HighlightersDialog::optionsChanged,
@@ -1289,6 +1302,15 @@ void MainWindow::toggleOverviewVisibility( bool isVisible )
     config.setOverviewVisible( isVisible );
     config.save();
     Q_EMIT optionsChanged();
+}
+
+void MainWindow::toggleQrawlerVisibility( bool isVisible )
+{
+    auto& config = Configuration::get();
+    config.setQrawlerVisible( isVisible );
+    emit optionsChanged();
+
+    currentCrawlerWidget()->toggleQrawlerVisible(isVisible);
 }
 
 void MainWindow::toggleMainLineNumbersVisibility( bool isVisible )

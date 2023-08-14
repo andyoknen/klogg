@@ -983,7 +983,7 @@ void CrawlerWidget::setup()
     using VisibilityFlags = LogFilteredData::VisibilityFlags;
     visibilityModel_ = new QStandardItemModel( this );
 
-    QStandardItem* marksAndMatchesItem = new QStandardItem( tr( "Marks and matches" ) );
+    QStandardItem* marksAndMatchesItem = new QStandardItem( tr( "All" ) );
     marksAndMatchesItem->setData(
         QVariant::fromValue( VisibilityFlags::Marks | VisibilityFlags::Matches ) );
     visibilityModel_->appendRow( marksAndMatchesItem );
@@ -993,8 +993,7 @@ void CrawlerWidget::setup()
     visibilityModel_->appendRow( marksItem );
 
     QStandardItem* matchesItem = new QStandardItem( tr( "Matches" ) );
-    matchesItem->setData(
-        QVariant::fromValue<FilteredView::Visibility>( VisibilityFlags::Matches ) );
+    matchesItem->setData( QVariant::fromValue<FilteredView::Visibility>( VisibilityFlags::Matches ) );
     visibilityModel_->appendRow( matchesItem );
 
     auto* visibilityView = new QListView( this );
@@ -1004,35 +1003,14 @@ void CrawlerWidget::setup()
     visibilityBox_ = new QComboBox();
     visibilityBox_->setModel( visibilityModel_ );
     visibilityBox_->setView( visibilityView );
-
-    // Select "Marks and matches" by default (same default as the filtered view)
+    visibilityBox_->setFixedHeight(22);
     visibilityBox_->setCurrentIndex( 0 );
-    visibilityBox_->setContentsMargins( 2, 2, 2, 2 );
+    visibilityBox_->setContentsMargins( 1, 0, 0, 0 );
 
-    // TODO: Maybe there is some way to set the popup width to be
-    // sized-to-content (as it is when the stylesheet is not overriden) in the
-    // stylesheet as opposed to setting a hard min-width on the view above.
-    /*visibilityBox_->setStyleSheet( " \
-        QComboBox:on {\
-            padding: 1px 2px 1px 6px;\
-            width: 19px;\
-        } \
-        QComboBox:!on {\
-            padding: 1px 2px 1px 7px;\
-            width: 19px;\
-            height: 16px;\
-            border: 1px solid gray;\
-        } \
-        QComboBox::drop-down::down-arrow {\
-            width: 0px;\
-            border-width: 0px;\
-        } \
-" );*/
 
     // Construct the Search Info line
     searchInfoLine_ = new InfoLine();
-    searchInfoLine_->setFrameStyle( QFrame::StyledPanel );
-    searchInfoLine_->setFrameShadow( QFrame::Sunken );
+    searchInfoLine_->setFrameStyle( QFrame::Box | QFrame::Sunken );
     searchInfoLine_->setLineWidth( 1 );
     searchInfoLine_->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
     auto searchInfoLineSizePolicy = searchInfoLine_->sizePolicy();
@@ -1041,14 +1019,23 @@ void CrawlerWidget::setup()
     searchInfoLineDefaultPalette_ = this->palette();
     searchInfoLine_->setContentsMargins( 2, 2, 2, 2 );
 
+    const QSize btnSize = QSize(26, 24);
+
     matchCaseButton_ = new QToolButton();
     matchCaseButton_->setToolTip( tr( "Match case" ) );
+    matchCaseButton_->setText( "Aa" );
+    matchCaseButton_->setStyleSheet("text-alig:center;");
+    matchCaseButton_->setMinimumSize(btnSize);
+    matchCaseButton_->setMaximumSize(btnSize);
     matchCaseButton_->setCheckable( true );
     matchCaseButton_->setFocusPolicy( Qt::NoFocus );
     matchCaseButton_->setContentsMargins( 2, 2, 2, 2 );
 
     useRegexpButton_ = new QToolButton();
     useRegexpButton_->setToolTip( tr( "Use regex" ) );
+    useRegexpButton_->setText( ".*" );
+    useRegexpButton_->setStyleSheet("text-alig:center;");
+    useRegexpButton_->setMaximumSize(btnSize);
     useRegexpButton_->setCheckable( true );
     useRegexpButton_->setFocusPolicy( Qt::NoFocus );
     useRegexpButton_->setContentsMargins( 2, 2, 2, 2 );
@@ -1069,6 +1056,7 @@ void CrawlerWidget::setup()
     searchRefreshButton_->setToolTip( tr( "Auto-refresh" ) );
     searchRefreshButton_->setCheckable( true );
     searchRefreshButton_->setFocusPolicy( Qt::NoFocus );
+    searchRefreshButton_->setIcon( QIcon( ":/images/icons8-filtration-16.png" ) );
     searchRefreshButton_->setContentsMargins( 2, 2, 2, 2 );
 
     // Construct the Search line
@@ -1077,6 +1065,7 @@ void CrawlerWidget::setup()
     searchLineEdit_->setEditable( true );
     searchLineEdit_->setCompleter( searchLineCompleter_ );
     searchLineEdit_->addItems( savedSearches_->recentSearches() );
+    searchLineEdit_->setFixedHeight(22);
     searchLineEdit_->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Minimum );
     searchLineEdit_->setSizeAdjustPolicy( QComboBox::AdjustToMinimumContentsLengthWithIcon );
     searchLineEdit_->lineEdit()->setMaxLength( std::numeric_limits<int>::max() / 1024 );
@@ -1102,9 +1091,10 @@ void CrawlerWidget::setup()
     clearButton_->setContentsMargins( 2, 2, 2, 2 );
 
     searchButton_ = new QToolButton();
-    searchButton_->setText( tr( "Search" ) );
-    searchButton_->setAutoRaise( true );
-    searchButton_->setContentsMargins( 2, 2, 2, 2 );
+    searchButton->setToolTip("Apply filter");
+    searchButton->setIcon( QIcon( ":/images/icons8-conversion-16.png" ) );
+    searchButton->setCheckable(false);
+    searchButton->setFocusPolicy(Qt::NoFocus);
 
     keepSearchResultsButton_ = new QToolButton();
     keepSearchResultsButton_->setText( tr( "Keep Results" ) );
@@ -1122,21 +1112,17 @@ void CrawlerWidget::setup()
     predefinedFilters_ = new PredefinedFiltersComboBox( this );
 
     auto* searchLineLayout = new QHBoxLayout;
-    searchLineLayout->setContentsMargins( 2, 2, 2, 2 );
-
-    searchLineLayout->addWidget( visibilityBox_ );
-    searchLineLayout->addWidget( matchCaseButton_ );
-    searchLineLayout->addWidget( useRegexpButton_ );
-    searchLineLayout->addWidget( inverseButton_ );
-    searchLineLayout->addWidget( booleanButton_ );
-    searchLineLayout->addWidget( searchRefreshButton_ );
-    searchLineLayout->addWidget( predefinedFilters_ );
-    searchLineLayout->addWidget( searchLineEdit_ );
-    searchLineLayout->addWidget( clearButton_ );
-    searchLineLayout->addWidget( searchButton_ );
-    searchLineLayout->addWidget( keepSearchResultsButton_ );
-    searchLineLayout->addWidget( stopButton_ );
-    searchLineLayout->addWidget( searchInfoLine_ );
+    searchLineLayout->addWidget( searchRefreshButton );
+    searchLineLayout->addWidget( searchLineEdit );
+    searchLineLayout->addWidget( searchButton );
+    searchLineLayout->addWidget( searchInfoLine );
+    searchLineLayout->addWidget( matchCaseButton );
+    searchLineLayout->addWidget( useRegexpButton );
+    searchLineLayout->addWidget( visibilityBox );
+    searchLineLayout->addWidget( stopButton );
+    searchLineLayout->setSpacing( 0 );
+    searchLineLayout->setMargin( 2 );
+    searchLineLayout->setContentsMargins( 0, 0, 0, 0 );
 
     // Construct the bottom window
     tabbedFilteredView_ = new QTabWidget;
@@ -1148,7 +1134,9 @@ void CrawlerWidget::setup()
     auto* bottomMainLayout = new QVBoxLayout;
     bottomMainLayout->addLayout( searchLineLayout );
     bottomMainLayout->addWidget( tabbedFilteredView_ );
-    bottomMainLayout->setContentsMargins( 2, 2, 2, 2 );
+    bottomMainLayout->setSpacing(2);
+    bottomMainLayout->setMargin(0);
+    bottomMainLayout->setContentsMargins( 1, 1, 1, 1 );
     bottomWindow->setLayout( bottomMainLayout );
 
     addWidget( logMainView_ );
@@ -1245,6 +1233,9 @@ void CrawlerWidget::setup()
              &CrawlerWidget::saveSplitterSizes );
 
     connect( logMainView_, &LogMainView::changeFontSize, this, &CrawlerWidget::changeFontSize );
+
+    lastSizes = this->sizes();
+    toggleQrawlerVisible( config.isQrawlerVisible() );
 
     connect( logFilteredData_.get(), &LogFilteredData::searchProgressed, this,
              &CrawlerWidget::updateFilteredView, Qt::QueuedConnection );
@@ -1702,6 +1693,22 @@ void CrawlerWidget::changeTopViewSize( int32_t delta )
     LOG_DEBUG << "CrawlerWidget::changeTopViewSize " << sizes().at( 0 );
 }
 
+void CrawlerWidget::toggleQrawlerVisible(bool visible)
+{
+    if( bottomWindow->isVisible() && !visible )
+    {
+        lastSizes = sizes();
+        bottomWindow->setVisible(false);
+        setSizes( QList<int>{ logMainView->height(), 0 } );
+    }
+    
+    if ( !bottomWindow->isVisible() && visible )
+    {
+        bottomWindow->setVisible(true);
+        setSizes( lastSizes );
+    }
+}
+
 void CrawlerWidget::addColorLabelToSelection( size_t label )
 {
     updateColorLabels( colorLabelsManager_.setColorLabel( label, getSelectedText() ) );
@@ -1722,6 +1729,22 @@ void CrawlerWidget::updateColorLabels(
 {
     logMainView_->setQuickHighlighters( labels );
     filteredView_->setQuickHighlighters( labels );
+}
+
+void CrawlerWidget::toggleQrawlerVisible(bool visible)
+{
+    if( bottomWindow->isVisible() && !visible )
+    {
+        lastSizes = sizes();
+        bottomWindow->setVisible(false);
+        setSizes( QList<int>{ logMainView->height(), 0 } );
+    }
+    
+    if ( !bottomWindow->isVisible() && visible )
+    {
+        bottomWindow->setVisible(true);
+        setSizes( lastSizes );
+    }
 }
 
 //

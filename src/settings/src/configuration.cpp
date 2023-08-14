@@ -244,6 +244,9 @@ void Configuration::retrieveFromStorage( QSettings& settings )
         = settings.value( "net.verifySslPeers", DefaultConfiguration.verifySslPeers_ ).toBool();
 
     // View settings
+
+    qrawlerVisible_ = settings.value( "view.qrawlerVisible" ).toBool();
+
     overviewVisible_
         = settings.value( "view.overviewVisible", DefaultConfiguration.overviewVisible_ ).toBool();
     lineNumbersVisibleInMain_ = settings
@@ -384,6 +387,7 @@ void Configuration::saveToStorage( QSettings& settings ) const
     settings.setValue( "net.verifySslPeers", verifySslPeers_ );
 
     settings.setValue( "view.overviewVisible", overviewVisible_ );
+    settings.setValue( "view.qrawlerVisible", qrawlerVisible_ );
     settings.setValue( "view.lineNumbersVisibleInMain", lineNumbersVisibleInMain_ );
     settings.setValue( "view.lineNumbersVisibleInFiltered", lineNumbersVisibleInFiltered_ );
     settings.setValue( "view.minimizeToTray", minimizeToTray_ );

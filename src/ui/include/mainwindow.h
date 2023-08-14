@@ -138,6 +138,7 @@ class MainWindow : public QMainWindow {
 
     // Change the view settings
     void toggleOverviewVisibility( bool isVisible );
+    void toggleQrawlerVisibility( bool isVisible );
     void toggleMainLineNumbersVisibility( bool isVisible );
     void toggleFilteredLineNumbersVisibility( bool isVisible );
 

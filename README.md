@@ -47,13 +47,22 @@ I try to keep a [changelog](CHANGELOG.md) with monthly changes.
 
 ## Table of Contents
 
-1. [About the Project](#about-the-project)
-1. [Installation](#installation)
-1. [Building](#building)
-1. [How to Get Help](#how-to-get-help)
-1. [Contributing](#contributing)
-1. [License](#license)
-1. [Authors](#authors)
+- [Overview](#overview)
+  - [Latest testing builds](#latest-testing-builds)
+- [Table of Contents](#table-of-contents)
+- [About the Project](#about-the-project)
+  - [Comparing with glogg](#comparing-with-glogg)
+- [Installation](#installation)
+  - [Current stable release builds](#current-stable-release-builds)
+    - [Windows](#windows)
+    - [Mac OS](#mac-os)
+    - [Linux](#linux)
+  - [Testing builds](#testing-builds)
+- [Building](#building)
+- [How to Get Help](#how-to-get-help)
+- [Contributing](#contributing)
+- [License](#license)
+- [Authors](#authors)
 
 ## About the Project
 

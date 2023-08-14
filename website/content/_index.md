@@ -60,7 +60,7 @@ Latest stable version:
 
 Latest development builds can be downloaded from releases on Github: 
 
-{{< button href="https://github.com/variar/klogg/releases/tag/continuous-win" >}}Windows{{< /button >}}
-{{< button href="https://github.com/variar/klogg/releases/tag/continuous-linux" >}}Linux{{< /button >}}
-{{< button href="https://github.com/variar/klogg/releases/tag/continuous-osx" >}}Mac{{< /button >}}
+{{< button href="https://github.com/brangr/klogg/releases/tag/continuous-win" >}}Windows{{< /button >}}
+{{< button href="https://github.com/brangr/klogg/releases/tag/continuous-linux" >}}Linux{{< /button >}}
+{{< button href="https://github.com/brangr/klogg/releases/tag/continuous-osx" >}}Mac{{< /button >}}
 

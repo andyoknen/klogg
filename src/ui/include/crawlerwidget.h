@@ -112,6 +112,9 @@ class CrawlerWidget : public QSplitter,
 
     void registerShortcuts();
 
+    // Toggle filter windows visible
+    void toggleQrawlerVisible(bool visible);
+
   public Q_SLOTS:
     // Stop the asynchoronous loading of the file if one is in progress
     // The file is identified by the view attached to it.
@@ -431,6 +434,9 @@ class CrawlerWidget : public QSplitter,
     QString encodingText_;
 
     ColorLabelsManager colorLabelsManager_;
+
+    // Last splitter sizes
+    QList<int> lastSizes;
 };
 
 #endif

@@ -47,11 +47,11 @@ constexpr QLatin1String StatusKey = QLatin1String( "status", 6 );
 
 TabbedCrawlerWidget::TabbedCrawlerWidget()
     : QTabWidget()
-    , newdata_icon_( ":/images/newdata_icon.png" )
-    , newfiltered_icon_( ":/images/newfiltered_icon.png" )
+    , newdata_icon_( ":/images/icons8-new-file-16.png" )
+    , newfiltered_icon_( ":/images/icons8-view-16.png" )
 {
 
-    QString tabStyle = "QTabBar::tab { height: 24px; }";
+    QString tabStyle = "QTabBar::tab { height: 20px; }";
     QString tabCloseButtonStyle = " QTabBar::close-button {\
               height: 12px; width: 12px;\
               subcontrol-origin: padding;\
@@ -97,7 +97,7 @@ TabbedCrawlerWidget::TabbedCrawlerWidget()
         tabCloseButtonStyle = tabCloseButtonStyle.arg( "" );
     }
 
-    myTabBar_.setStyleSheet( tabStyle.append( tabCloseButtonStyle ) );
+    myTabBar_.setStyleSheet( tabStyle );
 
     setTabBar( &myTabBar_ );
     myTabBar_.hide();
