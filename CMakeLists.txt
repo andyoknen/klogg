@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 project(klogg
-        VERSION 19.12.1
+        VERSION 19.12.2
         DESCRIPTION "klogg log viewer"
         LANGUAGES C CXX)
 set(PROJECT_HOMEPAGE_URL "https://github.com/brangr/klogg")
@@ -159,7 +159,7 @@ add_custom_target(stuff SOURCES
    .clang-format
 )
 
-option(BUILD_DOC "Build documentation" ON)
+option(BUILD_DOC "Build documentation" OFF)
 if (${BUILD_DOC})
     include(pandocology)
     add_document(
