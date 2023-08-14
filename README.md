@@ -40,6 +40,7 @@ All other build dependencies are provided in 3rdparty directory.
 
 ### Building on Linux and Mac
 ```
+sudo apt install build-essential cmake qtbase5-dev libboost-all-dev ragel pkg-config
 cd <path_to_project_root>
 mkdir build
 cd build
