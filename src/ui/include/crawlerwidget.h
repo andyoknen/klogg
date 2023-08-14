@@ -375,6 +375,7 @@ class CrawlerWidget : public QSplitter,
     QTabWidget* tabbedFilteredView_;
 
     OverviewWidget* overviewWidget_;
+    QWidget* bottomWindow_;
 
     QComboBox* visibilityBox_;
     QStandardItemModel* visibilityModel_;

@@ -961,8 +961,8 @@ void CrawlerWidget::setup()
     assert( logFilteredData_ );
 
     // The views
-    auto bottomWindow = new QWidget;
-    bottomWindow->setContentsMargins( 2, 0, 2, 0 );
+    bottomWindow_ = new QWidget;
+    bottomWindow_->setContentsMargins( 2, 0, 2, 0 );
 
     overviewWidget_ = new OverviewWidget();
     logMainView_
@@ -1091,10 +1091,10 @@ void CrawlerWidget::setup()
     clearButton_->setContentsMargins( 2, 2, 2, 2 );
 
     searchButton_ = new QToolButton();
-    searchButton->setToolTip("Apply filter");
-    searchButton->setIcon( QIcon( ":/images/icons8-conversion-16.png" ) );
-    searchButton->setCheckable(false);
-    searchButton->setFocusPolicy(Qt::NoFocus);
+    searchButton_->setToolTip("Apply filter");
+    searchButton_->setIcon( QIcon( ":/images/icons8-conversion-16.png" ) );
+    searchButton_->setCheckable(false);
+    searchButton_->setFocusPolicy(Qt::NoFocus);
 
     keepSearchResultsButton_ = new QToolButton();
     keepSearchResultsButton_->setText( tr( "Keep Results" ) );
@@ -1112,14 +1112,14 @@ void CrawlerWidget::setup()
     predefinedFilters_ = new PredefinedFiltersComboBox( this );
 
     auto* searchLineLayout = new QHBoxLayout;
-    searchLineLayout->addWidget( searchRefreshButton );
-    searchLineLayout->addWidget( searchLineEdit );
-    searchLineLayout->addWidget( searchButton );
-    searchLineLayout->addWidget( searchInfoLine );
-    searchLineLayout->addWidget( matchCaseButton );
-    searchLineLayout->addWidget( useRegexpButton );
-    searchLineLayout->addWidget( visibilityBox );
-    searchLineLayout->addWidget( stopButton );
+    searchLineLayout->addWidget( searchRefreshButton_ );
+    searchLineLayout->addWidget( searchLineEdit_ );
+    searchLineLayout->addWidget( searchButton_ );
+    searchLineLayout->addWidget( searchInfoLine_ );
+    searchLineLayout->addWidget( matchCaseButton_ );
+    searchLineLayout->addWidget( useRegexpButton_ );
+    searchLineLayout->addWidget( visibilityBox_ );
+    searchLineLayout->addWidget( stopButton_ );
     searchLineLayout->setSpacing( 0 );
     searchLineLayout->setMargin( 2 );
     searchLineLayout->setContentsMargins( 0, 0, 0, 0 );
@@ -1137,10 +1137,10 @@ void CrawlerWidget::setup()
     bottomMainLayout->setSpacing(2);
     bottomMainLayout->setMargin(0);
     bottomMainLayout->setContentsMargins( 1, 1, 1, 1 );
-    bottomWindow->setLayout( bottomMainLayout );
+    bottomWindow_->setLayout( bottomMainLayout );
 
     addWidget( logMainView_ );
-    addWidget( bottomWindow );
+    addWidget( bottomWindow_ );
 
     // Default search checkboxes
     auto& config = Configuration::get();
@@ -1695,16 +1695,16 @@ void CrawlerWidget::changeTopViewSize( int32_t delta )
 
 void CrawlerWidget::toggleQrawlerVisible(bool visible)
 {
-    if( bottomWindow->isVisible() && !visible )
+    if( bottomWindow_->isVisible() && !visible )
     {
         lastSizes = sizes();
-        bottomWindow->setVisible(false);
-        setSizes( QList<int>{ logMainView->height(), 0 } );
+        bottomWindow_->setVisible(false);
+        setSizes( QList<int>{ logMainView_->height(), 0 } );
     }
     
-    if ( !bottomWindow->isVisible() && visible )
+    if ( !bottomWindow_->isVisible() && visible )
     {
-        bottomWindow->setVisible(true);
+        bottomWindow_->setVisible(true);
         setSizes( lastSizes );
     }
 }

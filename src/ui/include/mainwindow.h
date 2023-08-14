@@ -270,6 +270,7 @@ class MainWindow : public QMainWindow {
     QAction* lineNumbersVisibleInMainAction;
     QAction* lineNumbersVisibleInFilteredAction;
     QAction* followAction;
+    QAction *qrawlerAction;
     QAction* textWrapAction;
     QAction* reloadAction;
     QAction* stopAction;

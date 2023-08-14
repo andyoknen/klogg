@@ -1175,7 +1175,7 @@ void MainWindow::openUrl()
 // Opens the 'Highlighters' dialog box
 void MainWindow::editHighlighters()
 {
-    FiltersDialog dialog( this );
+    HighlightersDialog dialog( this );
     signalMux_.connect( &dialog, SIGNAL( optionsChanged() ), SLOT( applyConfiguration() ) );
 
     connect( &dialog, &HighlightersDialog::optionsChanged,
@@ -1308,7 +1308,7 @@ void MainWindow::toggleQrawlerVisibility( bool isVisible )
 {
     auto& config = Configuration::get();
     config.setQrawlerVisible( isVisible );
-    emit optionsChanged();
+    Q_EMIT optionsChanged();
 
     currentCrawlerWidget()->toggleQrawlerVisible(isVisible);
 }
