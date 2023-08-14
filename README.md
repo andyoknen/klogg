@@ -41,10 +41,9 @@ All other build dependencies are provided in 3rdparty directory.
 ### Building on Linux and Mac
 ```
 sudo apt install build-essential cmake qtbase5-dev libboost-all-dev ragel pkg-config
-cd <path_to_project_root>
 mkdir build
 cd build
-cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_VERSION=X.X.X -DCMAKE_INSTALL_PREFIX=/usr/local ../
+cmake -DKLOGG_USE_HYPERSCAN=OFF -DCMAKE_BUILD_TYPE=Release -DBUILD_VERSION=19.12.2 -DCMAKE_INSTALL_PREFIX=/usr/local ../
 cmake --build .
 make install (as root if needed)
 ```
