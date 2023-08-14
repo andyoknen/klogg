@@ -1731,21 +1731,6 @@ void CrawlerWidget::updateColorLabels(
     filteredView_->setQuickHighlighters( labels );
 }
 
-void CrawlerWidget::toggleQrawlerVisible(bool visible)
-{
-    if( bottomWindow->isVisible() && !visible )
-    {
-        lastSizes = sizes();
-        bottomWindow->setVisible(false);
-        setSizes( QList<int>{ logMainView->height(), 0 } );
-    }
-    
-    if ( !bottomWindow->isVisible() && visible )
-    {
-        bottomWindow->setVisible(true);
-        setSizes( lastSizes );
-    }
-}
 
 //
 // SearchState implementation
